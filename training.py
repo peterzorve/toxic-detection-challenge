@@ -18,11 +18,11 @@ idx = int(0.7 * length_of_data)
 columns_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
 data_toxic, data_severe_toxic, data_obscene, data_threat, data_insult, data_identity_hate = split_data(data)  
 
-train_data_toxic = data_severe_toxic.iloc[ :100 ].reset_index(drop=True)
-test_data_toxic  = data_severe_toxic.iloc[100 : 200 ].reset_index(drop=True)
+train_data = data_insult.iloc[ :100 ].reset_index(drop=True)
+test_data  = data_insult.iloc[100: ].reset_index(drop=True)
 
-dataset_train = TrainData(train_data_toxic, data_target='severe_toxic', max_seq_len=max_seq_length)
-dataset_test  = TrainData(test_data_toxic,  data_target='severe_toxic', max_seq_len=max_seq_length)
+dataset_train = TrainData(train_data, data_target='insult', max_seq_len=max_seq_length)
+dataset_test  = TrainData(test_data,  data_target='insult', max_seq_len=max_seq_length)
 
 
 #####################################################################################################################################################
@@ -39,7 +39,7 @@ def collation_test(batch, vectorizer=dataset_test.vectorizer):
     target = torch.LongTensor([item[1] for item in batch]) 
     return inputs, target
 
-train_loader = DataLoader(dataset_train, batch_size=32, collate_fn=collation_train)
+train_loader = DataLoader(dataset_train, batch_size=32, collate_fn=collation_train, shuffle=True)
 test_loader  = DataLoader(dataset_test,  batch_size=32, collate_fn=collation_test)
 
 #####################################################################################################################################################
@@ -58,7 +58,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.003)
 
 
 
-epochs = 30
+epochs = 15
 all_train_losses, all_test_losses, all_accuracies = [],  [], []
 
 for e in range(epochs):
@@ -106,7 +106,7 @@ for e in range(epochs):
 
      print(f'Epoch  : {e+1:3}/{epochs}    |   Train Loss:  : {avg_train_loss:.8f}     |  Test Loss:  : {avg_test_loss:.8f}  |  Accuracy  :   {avg_running_accuracy:.4f}')
 
-torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_model_SEVERE_TOXIC')
+torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_model_INSULT')
 
 plt.plot(all_train_losses, label='Train Loss')
 plt.plot(all_test_losses,  label='Test Loss')

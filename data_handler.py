@@ -6,12 +6,12 @@ import spacy
 from torchtext.vocab import FastText
 from collections import Counter
 import torch 
-from torch.utils.data import DataLoader, Dataset 
+from torch.utils.data import Dataset 
 
-from model import ToxicClassifier 
+#from model import ToxicClassifier 
 
 
-data = pd.read_csv('data/train.csv')
+data = pd.read_csv(r'C:\Users\ritth\code\Strive\toxic-detection-challenge\train.csv\train.csv')
 # print(data.head(10))
 # print(data.columns)
 data = data.drop('id', axis=1)
