@@ -18,11 +18,11 @@ idx = int(0.7 * length_of_data)
 columns_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
 data_toxic, data_severe_toxic, data_obscene, data_threat, data_insult, data_identity_hate = split_data(data)  
 
-train_data = data_identity_hate.iloc[ :100 ].reset_index(drop=True)
-test_data  = data_identity_hate.iloc[100: ].reset_index(drop=True)
+train_data = data_obscene.iloc[ :100 ].reset_index(drop=True)
+test_data  = data_obscene.iloc[100: ].reset_index(drop=True)
 
-dataset_train = TrainData(train_data, data_target='identity_hate', max_seq_len=max_seq_length)
-dataset_test  = TrainData(test_data,  data_target='identity_hate', max_seq_len=max_seq_length)
+dataset_train = TrainData(train_data, data_target='obscene', max_seq_len=max_seq_length)
+dataset_test  = TrainData(test_data,  data_target='obscene', max_seq_len=max_seq_length)
 
 
 #####################################################################################################################################################
@@ -106,7 +106,7 @@ for e in range(epochs):
 
      print(f'Epoch  : {e+1:3}/{epochs}    |   Train Loss:  : {avg_train_loss:.8f}     |  Test Loss:  : {avg_test_loss:.8f}  |  Accuracy  :   {avg_running_accuracy:.4f}')
 
-torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_model_IDENTITY_HATE')
+torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_model_OBSCENE')
 
 plt.plot(all_train_losses, label='Train Loss')
 plt.plot(all_test_losses,  label='Test Loss')
