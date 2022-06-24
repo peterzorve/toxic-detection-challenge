@@ -58,7 +58,7 @@ def preprocessing(data):
 data = (preprocessing(data))
 # print(data['comment_text'][3])
 
-print(len(data))
+# print(len(data))
 
 # print(data.head())
 
@@ -80,20 +80,7 @@ def split_data(data):
      return data_toxic, data_severe_toxic, data_obscene, data_threat, data_insult, data_identity_hate 
 
 
-# data_toxic, data_severe_toxic, data_obscene, data_threat, data_insult, data_identity_hate = split_data(data) 
 
-# print()
-# print(data_toxic.head(5))
-# print()
-# print(data_severe_toxic.head(5))
-# print()
-# print(data_obscene.head(5))
-# print()
-# print(data_threat.head(5))
-# print()
-# print(data_insult.head(5))
-# print()
-# print(data_identity_hate.head(5))
 
 
 
@@ -143,7 +130,7 @@ class TrainData(Dataset):
         train_iter = iter(data['comment_text'].values)
         self.vec = FastText("simple")
 
-        self.vec.vectors[1] = -torch.ones(self.vec.vectors[1].shape[0]) # replacing the vector associated with 1 (padded value) to become a vector of -1.
+        self.v. ec.vectors[1] = -torch.ones(self.vec.vectors[1].shape[0]) # replacing the vector associated with 1 (padded value) to become a vector of -1.
         self.vec.vectors[0] = torch.zeros(self.vec.vectors[0].shape[0]) # replacing the vector associated with 0 (unknown) to become zeros
         self.vectorizer = lambda x: self.vec.vectors[x]
 
@@ -162,4 +149,22 @@ class TrainData(Dataset):
 ###########################################################################################################################################################
 
 
+
+
+
+
+data_toxic, data_severe_toxic, data_obscene, data_threat, data_insult, data_identity_hate = split_data(data) 
+
+# print()
+# print(data_toxic.head(5))
+# print()
+# print(data_severe_toxic.head(5))
+# print()
+# print(data_obscene.head(5))
+# print()
+# print(data_threat.head(5))
+# print()
+# print(data_insult.head(5))
+# print()
+# print(data_identity_hate.head(5))
 
